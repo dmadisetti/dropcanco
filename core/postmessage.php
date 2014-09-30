@@ -1,17 +1,31 @@
 <?php 
-$db_hostname="db497389632.db.1and1.com"; 
-$db_username="dbo497389632"; 
-$db_password="LD2apriori450";
-$db_database="db497389632"; 					
-$db_server = mysql_connect($db_hostname, $db_username, $db_password);
+
+# Env settings
+if (getenv("ENV") == "DEV") {
+  ini_set("display_startup_errors",1);
+  error_reporting(E_ALL);
+  set_error_handler( function($errno,$errstr,$errfile,$errline,$errcontext){
+    echo sprintf("<p style='list-style:disc outside none; display:list-item;margin-left: 20px;'><strong>Error:</strong> %s in %s on %d</p>\n",$errstr,$errfile,$errline);
+  } , E_ALL);
+}
+
+
+$db_hostname=getenv("MYSQL_PORT_3306_TCP_ADDR");
+$db_username=getenv("USER"); 
+$db_password=getenv("PASSWORD");
+$db_database=getenv("DATABASE");
+
+var_dump([$db_hostname, $db_username, $db_password]);
+
+$db_server = mysqli_connect($db_hostname, $db_username, $db_password);
+
 if (!$db_server) die("location:cannotlogin.php");
-mysql_select_db($db_database) or die ("location:cannotlogin.php");
+$db_server->select_db($db_database) or die ("location:cannotlogin.php");
 //CONNECTION
 
 $message = $_POST['message'];
 
-
-$message = mysql_real_escape_string($message);
+$message = $db_server->real_escape_string($message);
 
 $time = time();
 $rand = mt_rand();
@@ -59,19 +73,18 @@ $copier = "on";
 }
 
 
-
-$result1 = mysql_query("SELECT * FROM dropcan ORDER BY time DESC");
-	   	while($row = mysql_fetch_assoc($result1)) //LOGGED IN USER DATA
-		{
-		if($row["memo"] == $message)
-		{
-		$copierbig = "on";
-		}
-		}
+# This is a major bottleneck
+# I know you don't want dupe results, but there are better ways
+# $result1 = $db_server->query("SELECT * FROM dropcan ORDER BY time DESC");
+# while($row = $db_server->fetch_assoc($result1)){
+# 	if($row["memo"] == $message){
+# 		$copierbig = "on";
+# 	}
+# }
 
 if($message != "" and $censor === FALSE and $alarm != "on" and $copier != "on" and $copierbig != "on" and 2001 > strlen($message))
 {
-mysql_query("INSERT INTO dropcan (memo, time, settings) VALUES('$message', '$time', '$random')") or die(mysql_error()); 
+$db_server->query("INSERT INTO dropcan (memo, time, settings) VALUES('$message', '$time', '$random')") or die(mysql_error()); 
 echo "<meta http-equiv=\"refresh\" content=\"0;url='index.php?access=view'\">";
 }
 elseif($copier == "on")

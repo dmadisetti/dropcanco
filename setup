@@ -48,14 +48,12 @@ db(){
 
     mkdir -p database/mysql
     mkdir -p database/backups
-    cd database
-    crontab cron.txt
     cd
 }
 
 repo(){
 
-    if [ -d "theme.git" ]; then
+    if [ -d "dropcanco.git" ]; then
 
         #looks like we've already done our job
         echo "Already done repo."

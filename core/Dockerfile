@@ -5,7 +5,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN sudo apt-get -y update
 RUN sudo apt-get install -y wget
-RUN wget wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -
+RUN sudo apt-get install -y libmemcached-dev
+RUN wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -
 RUN echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.list.d/hhvm.list
 RUN sudo apt-get -y update
 RUN sudo apt-get install -y hhvm

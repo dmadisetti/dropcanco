@@ -32,11 +32,11 @@ show_help(){
 # Quick script to get db
 # ssh u71655795@personificate.com
 # LD2apriori450
-# mysqldump -hdb525540011.db.1and1.com -udbo525540011 -p2tobeornottobe450! db525540011 > db-backup/backup20.sql
-# scp u71655795@personificate.com:db-backup/backup20.sql database/seed.sql
+# mysqldump -hdb497389632.db.1and1.com -udbo497389632 -pLD2apriori450 db497389632 > db-backup/dropcanco.sql
+# scp u71655795@personificate.com:db-backup/dropcanco.sql database/seed.sql
 
 # Quick script to get assets
-# scp -rpq u71655795@personificate.com:clickandbuilds/WordPress/MyCMS2/wp-content/uploads uploads
+# scp -rpq u71655795@personificate.com:dropcanco ./
 
 run(){
     mysql

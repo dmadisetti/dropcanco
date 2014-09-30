@@ -1,6 +1,16 @@
  <?php
 $access = $_GET['access'];
 $authority = $_POST['authority'];
+
+# Env settings
+if (getenv("ENV") == "DEV") {
+  ini_set("display_startup_errors",1);
+  error_reporting(E_ALL);
+  set_error_handler( function($errno,$errstr,$errfile,$errline,$errcontext){
+    echo sprintf("<p style='list-style:disc outside none; display:list-item;margin-left: 20px;'><strong>Error:</strong> %s in %s on %d</p>\n",$errstr,$errfile,$errline);
+  } , E_ALL);
+}
+
 ?>
 <head>
 <script>
@@ -130,11 +140,10 @@ function put_url_in_a($arr)
         //links
         return sprintf('<a href="%1$s">%1$s</a>', $arr[0]);
     }
-
-$db_hostname="db497389632.db.1and1.com"; 
-$db_username="dbo497389632"; 
-$db_password="LD2apriori450";
-$db_database="db497389632"; 					
+$db_hostname=getenv("MYSQL_PORT_3306_TCP_ADDR");
+$db_username=getenv("USER"); 
+$db_password=getenv("PASSWORD");
+$db_database=getenv("DATABASE");
 $db_server = mysql_connect($db_hostname, $db_username, $db_password);
 if (!$db_server) die("location:cannotlogin.php");
 mysql_select_db($db_database) or die ("location:cannotlogin.php");
