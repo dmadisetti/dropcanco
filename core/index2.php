@@ -1,6 +1,16 @@
  <?php
 $access = $_GET['access'];
 $authority = $_POST['authority'];
+
+# Env settings
+if (getenv("ENV") == "DEV") {
+  ini_set("display_startup_errors",1);
+  error_reporting(E_ALL);
+  set_error_handler( function($errno,$errstr,$errfile,$errline,$errcontext){
+    echo sprintf("<p style='list-style:disc outside none; display:list-item;margin-left: 20px;'><strong>Error:</strong> %s in %s on %d</p>\n",$errstr,$errfile,$errline);
+  } , E_ALL);
+}
+
 ?>
 <head>
 <script>
@@ -17,7 +27,7 @@ $authority = $_POST['authority'];
 <?php
 if($access == "view")
 {
-
+echo "<meta http-equiv=\"refresh\" content=\"60;url='index.php?access=view'\">";
 }
 else
 {
@@ -49,7 +59,7 @@ padding-top: 5px;
 </style>
 </head>
 <body>
-<?php if(1 == 2)
+<?php if($access != "view")
 {
 ?>
 <center>
@@ -61,20 +71,16 @@ The trashcan of the web
 <font size="4"> <br>
 (for things that really are irksome) 
 </font>
-<br><font size="2">Updates including favorites list of the past 24 hours coming soon!<br>
-  See what is in the trashcan <a href="http://dropcan.co/?access=view">right now.</a>
+<br><font size="3">Where your trash is dumped and eventually disappears forever.<br><br>
+  Throw away something right now to see the trash inside.
     </font>
-    <br>
+
 <font size="3"><?php if($access == "bad"){echo "<b>Please do not post inflammatory speech. Thank you. </b><br>";}?>
 <?php if($access == "copycat"){echo "<b>WOW!  So Original of you ;)</b><br><br>";}?>
 <?php if($access == "copycatbig"){echo "<b>That's already in the dropcan!  So original of you!</b><br><br>";}?>
 <font face="Tahoma">
-Throw something away right now!: &nbsp &nbsp &nbsp &nbsp &nbsp  </font>
-&nbsp &nbsp &nbsp &nbsp &nbsp 
-&nbsp &nbsp &nbsp &nbsp &nbsp 
-&nbsp &nbsp &nbsp &nbsp &nbsp 
-&nbsp &nbsp &nbsp &nbsp &nbsp 
-&nbsp &nbsp &nbsp &nbsp &nbsp </div>
+ </font>
+ </div>
 <br><br>
 <form action="postmessage.php" method="post">
 	  &nbsp &nbsp <textarea placeholder="Description of something you want to get rid of, a memory you would like forget, a bad idea you know will never work, or just simply any rubbish you encounter in life and are just sick off. Let the web take it. " name="message"></textarea><font color="E4E4E4">
@@ -134,11 +140,10 @@ function put_url_in_a($arr)
         //links
         return sprintf('<a href="%1$s">%1$s</a>', $arr[0]);
     }
-
-$db_hostname="db497389632.db.1and1.com"; 
-$db_username="dbo497389632"; 
-$db_password="LD2apriori450";
-$db_database="db497389632"; 					
+$db_hostname=getenv("MYSQL_PORT_3306_TCP_ADDR");
+$db_username=getenv("USER"); 
+$db_password=getenv("PASSWORD");
+$db_database=getenv("DATABASE");
 $db_server = mysql_connect($db_hostname, $db_username, $db_password);
 if (!$db_server) die("location:cannotlogin.php");
 mysql_select_db($db_database) or die ("location:cannotlogin.php");
@@ -147,7 +152,7 @@ mysql_select_db($db_database) or die ("location:cannotlogin.php");
   $counter = 0;
 	   	while($row = mysql_fetch_assoc($result1)) //LOGGED IN USER DATA
 		{
-		if($row['settings'] == "memo" and $counter < 1000 and strtolower($row['memo']) != "d" and $row['memo'] != "" and $row['memo'] != " "
+		if($row['settings'] == "memo" and $counter < 250 and strtolower($row['memo']) != "d" and $row['memo'] != "" and $row['memo'] != " "
 		
 		)
 		

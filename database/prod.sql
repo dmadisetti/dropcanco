@@ -3,3 +3,6 @@ grant all on *.* to garbageman@'%' identified by 'HUDMFr3jR4SmuLer' with grant o
 flush privileges;
 
 DROP USER root@'%';
+
+ALTER TABLE `dropcan` ADD hash VARCHAR(60);
+UPDATE `dropcan` SET hash = md5(memo);
