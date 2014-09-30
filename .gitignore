@@ -1,0 +1,15 @@
+.bash_history
+.bash_logout
+.cache/
+.dockercfg
+.mysql_history
+.profile
+.ssh/
+.vagrant
+.viminfo
+core/www.pid
+database/backups/
+database/mysql/
+dropcanco.pem
+server/sites-enabled/0_streams.conf
+dropcanco.git/

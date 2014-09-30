@@ -1,0 +1,129 @@
+#!/bin/bash
+show_help(){
+    echo '
+
+    Why Hello there! You must be looking for help
+
+    - p for prod
+
+    - d for dev
+
+    - v for vagrant
+
+    - k add key (put the .pem in devbox root)
+
+    '
+    exit 0
+}
+
+key(){
+
+    # 1000 security experts simultaneously having heart attacks. Devs better protect this key with their lives.
+    echo '
+Host server
+    HostName 54.69.135.52
+    IdentityFile `pwd`/dropcanco.pem' >> ~/.ssh/config
+    exit 0;
+}
+
+docker(){
+    curl -s get.docker.io/ubuntu/ | sudo sh
+}
+
+client(){
+    # for teh dumps
+    sudo apt-get install mysql-client-5.5
+}
+
+db(){
+    if [ -d "database/mysql" ]; then
+
+        #looks like we've already done our job
+        echo "Already done mysql."
+        return
+
+    fi
+
+    client
+
+    mkdir -p database/mysql
+    mkdir -p database/backups
+    cd database
+    crontab cron.txt
+    cd
+}
+
+repo(){
+
+    if [ -d "theme.git" ]; then
+
+        #looks like we've already done our job
+        echo "Already done repo."
+        return
+
+    fi
+
+
+    mkdir dropcanco.git;
+    cd dropcanco.git;
+    git init --bare;
+    echo '#!/bin/sh
+    cd ~/;
+    unset GIT_DIR;
+    git pull hub master;
+
+
+    ' > hooks/post-update;
+
+    chmod +x hooks/post-update;
+    cd;
+    sudo chown -R ubuntu ./;
+    sudo chown -R ubuntu dropcanco.git;
+}
+
+prod(){
+
+    export ENV=prod
+    theme
+    repo
+    db
+
+    # Let's set up some monitoring
+    docker
+
+    exit 0
+}
+
+dev(){
+    
+    export ENV=dev
+    theme
+    exit 0
+}
+
+vm(){    
+    export ENV=dev
+    sudo apt-get install git
+    client
+    theme
+    docker
+    exit 0
+}
+
+while getopts "h?dpvkx:" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        ;;
+    p)  prod
+        ;;
+    d)  dev
+        ;;
+    v)  vm
+        ;;
+    k)  key
+        ;;
+    esac
+done
+
+show_help
