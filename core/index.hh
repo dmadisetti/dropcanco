@@ -78,7 +78,7 @@ class Controller {
 
         # Validate
         $clean    = $this->validate($message);
-        $original = $this->check($hash);
+        $original = $this->check($hash) && trim($message) != ''; 
         $short    = 2001 > strlen($message);
 
 
