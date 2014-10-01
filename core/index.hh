@@ -84,6 +84,7 @@ class Controller {
         # Insert if I can
         if($clean && $original && $short){
             $message = preg_replace("@https?://\S+\.?\S+\.\S+@", '<a href="\\0">\\0</a>', $message);
+            $message = preg_replace("@\#[a-zA-Z0-9]*@", '<b class="hastag">\\0</b>', $message);
             $this->db_server->query("INSERT INTO dropcan (memo, hash, time, settings) VALUES('$message', '$hash', '$time', '$type')") or die(mysql_error()); 
             $response = array("success"=> true, "message"=> "WOW!  So Original of you ;)");
         }else{
