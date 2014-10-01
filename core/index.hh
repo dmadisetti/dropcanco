@@ -12,6 +12,7 @@ if (getenv("ENV") == "DEV") {
 class Controller {
 
     private $db_server;
+    private $query ="SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%m %p:') as formatted FROM dropcan ORDER BY time DESC limit 100";
 
     public function __construct(){
 
@@ -27,8 +28,11 @@ class Controller {
                 echo $this->stache->render('main.mustache',$this->index());
                 break;
             case "/posts/":
-                if(isset($_COOKIE['view'])) echo $this->stache->render('posts.mustache', $this->messages());
+                if(isset($_COOKIE['view'])) echo $this->stache->render('posts.mustache', $this->messages(false));
                 else $this->redirect("/");
+                break;
+            case "/new/":
+                echo $this->stache->render('raw_posts.mustache', $this->messages(true));
                 break;
             default:
                 header("HTTP/1.0 404 Not Found");
@@ -62,30 +66,33 @@ class Controller {
         if (!$this->connect()) return $response;
 
         # Store our message
-        $message = $this->db_server->real_escape_string($_POST['message']);
+        $message = htmlspecialchars($this->db_server->real_escape_string($_POST['message']));
 
         # Meta
         $time  = time();
         $type  = substr($message,0,5) == "*gold" ? "gold" : "memo";
-        $message = $type == "gold" ? substr($message,5) : $message;
+        $message  = $type == "gold" ? substr($message,5) : $message;
 
         # Hash to prevent collsion
-        $hash    = md5($message);
+        $hash     = md5($message);
 
         # Validate
-        $clean = $this->validate($message);
+        $clean    = $this->validate($message);
         $original = $this->check($hash);
-        $short = 2001 > strlen($message);
+        $short    = 2001 > strlen($message);
+
 
         # Insert if I can
         if($clean && $original && $short){
+            $message = preg_replace("@https?://\S+\.?\S+\.\S+@", '<a href="\\0">\\0</a>', $message);
             $this->db_server->query("INSERT INTO dropcan (memo, hash, time, settings) VALUES('$message', '$hash', '$time', '$type')") or die(mysql_error()); 
             $response = array("success"=> true, "message"=> "WOW!  So Original of you ;)");
         }else{
             $response["success"] = false;
-            $response["message"] = !$clean ? "That's already in the dropcan!  So original of you!" 
-                                : !$original ? "Please do not post inflammatory speech. Thank you."
-                                : "Too long friend";
+            $response["message"] = !$original ? 
+                                   !$clean ? "Please do not post inflammatory speech. Thank you."
+                                   : "That's already in the dropcan!  So original of you!"
+                                   : "Too long friend";
         }
         return $response;
     }
@@ -101,27 +108,19 @@ class Controller {
     }
 
     private function validate($message): boolean{
-        return preg_match('/(?:^[\s]*$|bitch|fuck|dick|obama|muslim|jew|christian|columbia|balls|cunt|nigger)/i', strtolower($message)) == 0;
+        return preg_match('/(?:bitch|fuck|dick|obama|muslim|jew|christian|columbia|balls|cunt|nigger)/i', $message) == 0;
     }
 
     private function check($hash): boolean{
         return $this->db_server->query("SELECT * FROM dropcan WHERE hash = '$hash'")->num_rows == 0;
     }
 
-    private function messages(): array{
+    private function messages($timed): array{
         $response = array("message"=>"Momentary difficulities. We're on it.");
         if (!$this->connect()) return $response;
-        return array("data"=>($this->db_server->query("
-            SELECT 
-                memo
-                ,settings
-                ,from_unixtime(time,'%M %e, %Y, %l:%m %p:') as time
-            FROM 
-                dropcan 
-            ORDER BY 
-                time 
-            DESC 
-                limit 100")->fetch_all(MYSQLI_ASSOC)));
+        $time  = time();
+        $query = !$timed? $this->query : "SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%m %p:') as formatted FROM dropcan WHERE time > $time - 5 ORDER BY time DESC limit 10";
+        return array("data"=>($this->db_server->query($query)->fetch_all(MYSQLI_ASSOC)));
     }
 
     private function redirect($location): void{

@@ -1,18 +1,12 @@
 {{>head}}
 	
-	<div class="messages">
-		{{#data}}
-		<div class="message {{settings}}">
-			<div class="inner">
-			<b>{{time}}</b>
-			{{memo}}
-			</div>
-		</div>
-		{{/data}}
+	<div class="messages" id="container">
+		{{>raw_posts}}
 	</div>
 
 	<a href="/">
-		<button class="back-button"></button>
+		<button class="button back-button"></button>
 	</a>
 
+	<script src="/assets/the.js"></script>
 {{>foot}}

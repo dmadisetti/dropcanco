@@ -1,2 +1,2 @@
-<?php 
+<?php
 require "index.hh";
