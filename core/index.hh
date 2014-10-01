@@ -81,7 +81,6 @@ class Controller {
         $original = $this->check($hash) && trim($message) != ''; 
         $short    = 2001 > strlen($message);
 
-
         # Insert if I can
         if($clean && $original && $short){
             $message = preg_replace("@https?://\S+\.?\S+\.\S+@", '<a href="\\0">\\0</a>', $message);
@@ -89,10 +88,10 @@ class Controller {
             $response = array("success"=> true, "message"=> "WOW!  So Original of you ;)");
         }else{
             $response["success"] = false;
-            $response["message"] = !$original ? 
-                                   !$clean ? "Please do not post inflammatory speech. Thank you."
-                                   : "That's already in the dropcan!  So original of you!"
-                                   : "Too long friend";
+            $response["message"] = $original ? 
+                ($clean ? "Too long friend"
+                    : "Please do not post inflammatory speech. Thank you.")
+                : "That's already in the dropcan!  So original of you!";
         }
         return $response;
     }
