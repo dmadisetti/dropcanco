@@ -12,7 +12,7 @@ if (getenv("ENV") == "DEV") {
 class Controller {
 
     private $db_server;
-    private $query ="SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%m %p:') as formatted FROM dropcan ORDER BY time DESC limit 100";
+    private $query ="SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%i %p:') as formatted FROM dropcan ORDER BY time DESC limit 100";
 
     public function __construct(){
 
@@ -119,7 +119,7 @@ class Controller {
         $response = array("message"=>"Momentary difficulities. We're on it.");
         if (!$this->connect()) return $response;
         $time  = time();
-        $query = !$timed? $this->query : "SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%m %p:') as formatted FROM dropcan WHERE time > $time - 5 ORDER BY time DESC limit 10";
+        $query = !$timed? $this->query : "SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%i %p:') as formatted FROM dropcan WHERE time > $time - 5 ORDER BY time DESC limit 10";
         return array("data"=>($this->db_server->query($query)->fetch_all(MYSQLI_ASSOC)));
     }
 
