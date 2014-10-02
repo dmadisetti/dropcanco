@@ -13,7 +13,6 @@ check = function() {
                     frag.appendChild(child);
                 container.insertBefore(frag, container.firstElementChild); // Now, append all elements at once
             }
-            console.log(5000 + time - (new Date).getTime());
             window.setTimeout(check, 5000 + time - (new Date).getTime());
         }
     }
