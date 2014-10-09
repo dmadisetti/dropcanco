@@ -13,6 +13,7 @@ class Controller {
 
     private $db_server;
     private $query ="SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%i %p:') as formatted FROM dropcan ORDER BY time DESC limit 100";
+    private $year = 31540000;
 
     public function __construct(){
 
@@ -42,16 +43,13 @@ class Controller {
     }
 
     private function index(): array{
-        $data = array();
-
-        # kill the old cookie
-        if(isset($_COOKIE['view'])) setcookie("view", 0, time()-3600);
+        $data = array("cookied"=> isset($_COOKIE['view']));
 
         # Post or get?
         if($_SERVER['REQUEST_METHOD'] == "POST"){
             $data["response"] = $this->post();
             if($data["response"]["success"]){
-                setcookie("view", 1, time()+3600);
+                setcookie("view", 1, time()+$this->year);
                 $this->redirect("/posts/");
             }
         }

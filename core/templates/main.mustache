@@ -1,6 +1,14 @@
 {{>head}}
     <h3 class="center tagline header">Where your trash is dumped and eventually disappears forever.</h3>
-    <h4 class="center tagline header">Throw away something right now to see the trash inside.</h4>
+    <h4 class="center tagline header">
+    	{{#cookied}}
+    		Click <a href="/posts/">here</a> to return to the garbage pile. 
+    	{{/cookied}}
+    	{{^cookied}}
+    		Throw away something right now to see the trash inside.
+    	{{/cookied}}
+	</h4>
+
     {{#response}}<strong class="center">
         {{message}}
     </strong>{{/response}}
