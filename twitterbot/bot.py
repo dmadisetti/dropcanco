@@ -25,7 +25,10 @@ def run(f,**kwargs):
 	# connect
 	process = Popen('mysql dropcan -u%s -p%s -h $(sudo docker inspect mysql | grep IPAddress | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*")' % ("garbageman", "password"), stdout=PIPE, stdin=PIPE, shell=True)
 	args = ""
-	base = sys.argv[2] or "~/twitterbot/"
+	base = "~/twitterbot/"
+	if len(sys.argv) == 3
+		base = sys.argv[2]
+
 	for key in kwargs:
 		args += 'set @%s=\'%s\'; \n' % (key,kwargs[key])
 	return " ".join(process.communicate(args + ('source %sscripts/%s.sql' % (f,base)))[0].split("\n")[3:])
