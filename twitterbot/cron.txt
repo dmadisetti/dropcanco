@@ -1,0 +1,2 @@
+*/15 * * * * python ~/twitterbot/bot.py discover
+0 * * * * python ~/twitterbot/bot.py post

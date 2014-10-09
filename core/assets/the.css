@@ -1,3 +1,8 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
 .center{
     margin: 0 auto;
     position: relative;
@@ -49,6 +54,10 @@ h4{
 
 .hastag{
     color: #125843;
+}
+
+.at{
+    color: #5FA590;
 }
 
 .gold{
@@ -108,4 +117,13 @@ textarea {
     transition: all 0.7s ease 0s;
     height: 225px;
     padding-top: 5px;
+}
+
+.banner{
+    position: fixed;
+    bottom: 0;
+    padding: 30px;
+    width: 100%;
+    background-color: #EEE;
+    text-decoration: none;
 }

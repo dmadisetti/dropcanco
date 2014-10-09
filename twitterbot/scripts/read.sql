@@ -1,0 +1,1 @@
+INSERT INTO dropcan (memo, hash, time, settings, tweeted) select @status, MD5(@status), UNIX_TIMESTAMP(), @setting, 1 from dropcan where NOT EXISTS (SELECT hash FROM dropcan WHERE hash=MD5(@status)) limit 1;
