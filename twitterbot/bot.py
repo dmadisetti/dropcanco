@@ -18,6 +18,7 @@ def tweet(status):
 	oauth = authenticate()
 	status = urllib.quote_plus(re.sub('<[^>]*>', '', status[:140]))
 	response = requests.post(url="https://api.twitter.com/1.1/statuses/update.json?status=%s" % status, auth=oauth).json() 
+	print(response)
 
 
 def run(f,**kwargs):
