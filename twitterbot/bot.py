@@ -26,7 +26,7 @@ def run(f,**kwargs):
 	process = Popen('mysql dropcan -u%s -p%s -h $(sudo docker inspect mysql | grep IPAddress | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*")' % ("garbageman", "password"), stdout=PIPE, stdin=PIPE, shell=True)
 	args = ""
 	base = "~/twitterbot/"
-	if len(sys.argv) == 3
+	if len(sys.argv) == 3:
 		base = sys.argv[2]
 
 	for key in kwargs:
