@@ -30,7 +30,7 @@ def run(f,**kwargs):
 		base = sys.argv[2]
 
 	for key in kwargs:
-		args += 'set @%s=\'%s\'; \n' % (key,kwargs[key])
+		args += 'set @%s=\'%s\'; \n' % (key,re.escape(kwargs[key]))
 	return re.sub('\\n', ' '," ".join(process.communicate(args + ('source %sscripts/%s.sql' % (base,f)))[0].split("\n")[3:]))
 
 
@@ -44,9 +44,9 @@ def discover():
 	for status in response.get('statuses',[]):
 
 		text = re.sub('<[^>]*>', '', status['text'])
-		text = re.sub('https?://\S+\.?\S+\.\S+', '<a href="\\0">\\0</a>', text)
-		text = re.sub('\#[a-zA-Z0-9]*', '<b class="hastag">\\0</b>', text)
-		text = re.sub('\@[a-zA-Z0-9]*', '<b class="at">\\0</b>', text)
+		text = re.sub(r"(https?://\S+\.?\S+\.\S+)", r"<a href='\1'>\1</a>", text)
+		text = re.sub(r"(\#[a-zA-Z0-9]*)", r"<b class='hastag'>\1</b>", text)
+		text = re.sub(r"(\@[a-zA-Z0-9]*)", r"<b class='at'>\1</b>", text)
 
 		run('read',status=text,setting="twitter",)
 
