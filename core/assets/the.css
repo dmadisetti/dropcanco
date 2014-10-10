@@ -13,7 +13,10 @@ body{
 .logo{
     margin-top:60px;
     margin-bottom:15px;
+    padding: 0px 10px 0px 10px;
+    box-sizing: border-box;
     max-width: 700px;
+    width: 100%;
 }
 .tagline{
     color:#1a1a1a;
@@ -35,7 +38,9 @@ h4{
 
 .messages{
     margin: 0 auto;
-    width: 550px;
+    max-width: 550px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .message{
@@ -120,10 +125,17 @@ textarea {
 }
 
 .banner{
-    position: fixed;
+    box-sizing: border-box;
+    position: relative;
     bottom: 0;
     padding: 30px;
     width: 100%;
     background-color: #EEE;
     text-decoration: none;
+}
+
+@media screen and (min-width: 750px) {
+    .banner{
+        position: fixed;
+    }
 }
