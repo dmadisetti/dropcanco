@@ -31,7 +31,7 @@ def run(f,**kwargs):
 
 	for key in kwargs:
 		args += 'set @%s=\'%s\'; \n' % (key,kwargs[key])
-	return " ".join(process.communicate(args + ('source %sscripts/%s.sql' % (base,f)))[0].split("\n")[3:])
+	return re.sub('\\n', ' '," ".join(process.communicate(args + ('source %sscripts/%s.sql' % (base,f)))[0].split("\n")[3:]))
 
 
 def post():
