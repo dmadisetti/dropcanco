@@ -70,7 +70,15 @@ h4{
 }
 
 .gold > .inner > b {
-    color: #AAA;
+    color: #333;
+}
+
+.gold > .inner > b.at {
+    color: #444;
+}
+
+.gold > .inner > b.hashtag {
+    color: #555;
 }
 
 .button{
