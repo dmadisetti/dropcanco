@@ -1,2 +1,4 @@
 */15 * * * * python ~/twitterbot/bot.py discover
 0 * * * * python ~/twitterbot/bot.py post
+0 */4 * * * python ~/twitterbot/bot.py follow favorite
+0 0 * * * python ~/twitterbot/bot.py follow retweet

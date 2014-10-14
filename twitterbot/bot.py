@@ -2,6 +2,7 @@ import re
 import sys
 import urllib
 import requests
+import random
 from subprocess import Popen, PIPE
 from requests_oauthlib import OAuth1, OAuth2Session
 
@@ -50,7 +51,32 @@ def discover():
 
 		run('read',status=text,setting="twitter",)
 
+def follow():
+
+	if not len(sys.argv) is 3:
+		print("Bad.")
+		return
+
+	oauth = authenticate()
+
+	hashtags = ["trash","trashit","tossit","garbage","rubbish"]
+	hashtag = hashtags[random.randint(0, len(hashtags) - 1)]
+	response = requests.get(url="https://api.twitter.com/1.1/search/tweets.json?q=%23" + hashtag, auth=oauth).json()
+
+	# Just once
+	for status in response.get('statuses',[]):
+		if not (status['user']['protected'] and status['user']['following']):
+			follower = status['user']['id']
+			url = {
+				"retweet"	:"https://api.twitter.com/1.1/statuses/retweet/%d.json" % status["id"],
+				"favorite" 	:"https://api.twitter.com/1.1/favorites/create.json?id=%d" % status["id"]
+			}.get(sys.argv[2])
+			requests.post(url=url, auth=oauth)
+			requests.post(url="https://api.twitter.com/1.1/friendships/create.json?user_id=%d&follow=true" % follower, auth=oauth)
+			break
+
 ({
 	"post"	   :post,
-	"discover" :discover
+	"discover" :discover,
+	"follow"   :follow
 }.get(sys.argv[1]))()
