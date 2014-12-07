@@ -59,7 +59,7 @@ def follow():
 
 	oauth = authenticate()
 
-	hashtags = ["trash","trashit","tossit","garbage","rubbish"]
+	hashtags = ["trash","ithrowaway","ithrowaway","garbage","rubbish","dropcan"]
 	hashtag = hashtags[random.randint(0, len(hashtags) - 1)]
 	response = requests.get(url="https://api.twitter.com/1.1/search/tweets.json?q=%23" + hashtag, auth=oauth).json()
 
