@@ -4,7 +4,7 @@ import urllib
 import requests
 import random
 from subprocess import Popen, PIPE
-from requests_oauthlib import OAuth1, OAuth2Session
+from requests_oauthlib import OAuth1
 
 
 def authenticate():
@@ -59,7 +59,7 @@ def follow():
 
 	oauth = authenticate()
 
-	hashtags = ["trash","ithrowaway","ithrowaway","garbage","rubbish","dropcan"]
+	hashtags = ["trash","trash","trash","garbage","rubbish","dropcan"]
 	hashtag = hashtags[random.randint(0, len(hashtags) - 1)]
 	response = requests.get(url="https://api.twitter.com/1.1/search/tweets.json?q=%23" + hashtag, auth=oauth).json()
 

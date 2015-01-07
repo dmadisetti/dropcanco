@@ -24,7 +24,7 @@ Getting your environment running (If you're running some form of Debian, chances
 
 Getting the site running
 -----
-- Change your host file so that `ugtimes.io` points to `10.10.10.10` if vagrant and just `localhost` if otherwise. Read how to [here](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/)
+- Change your host file so that `dropcan.io` points to `10.10.10.10` if vagrant and just `localhost` if otherwise. Read how to [here](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/)
 - Run `setup -v` if you installed vagrant. Yup that stands for 'setup vagrant'.
 - Run `setup -d` otherwise. Yup that stands for 'setup dev'.
 - Good to go? run `./toolbelt -ad`. This should take awhile. Don't worry. Still have some more tea?
