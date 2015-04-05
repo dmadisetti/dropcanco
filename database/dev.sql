@@ -1,3 +1,4 @@
+-- Internal DB, plus only run for dev
 grant all on *.* to garbageman@'%' identified by 'password' with grant option; 
 flush privileges;
 

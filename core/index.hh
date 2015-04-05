@@ -1,6 +1,7 @@
 <?hh
 
 # Env settings
+# Debug if in Dev
 if (getenv("ENV") == "DEV") {
   ini_set("display_startup_errors",1);
   error_reporting(E_ALL);
@@ -9,6 +10,7 @@ if (getenv("ENV") == "DEV") {
   } , E_ALL);
 }
 
+// One controller to rule them all
 class Controller {
 
     private $db_server;
@@ -84,6 +86,7 @@ class Controller {
             $message = preg_replace("@https?://\S+\.?\S+\.\S+@", '<a href="\\0">\\0</a>', $message);
             $message = preg_replace("@\#[a-zA-Z0-9]*@", '<b class="hastag">\\0</b>', $message);
             $message = preg_replace("@\@[a-zA-Z0-9]*@", '<b class="at">\\0</b>', $message);
+            // Should have used more .sql files as snippets
             $this->db_server->query("INSERT INTO dropcan (memo, hash, time, settings,tweeted) VALUES('$message', '$hash', '$time', '$type',0)") or die(mysql_error()); 
             $response = array("success"=> true, "message"=> "WOW!  So Original of you ;)");
         }else{
@@ -107,7 +110,7 @@ class Controller {
     }
 
     private function validate($message): boolean{
-        return preg_match('/(?:bitch|fuck|dick|obama|muslim|jew|christian|columbia|balls|cunt|nigger)/i', $message) == 0;
+        return preg_match('/(?:badword|baddddword)/i', $message) == 0;
     }
 
     private function check($hash): boolean{
@@ -118,6 +121,7 @@ class Controller {
         $response = array("message"=>"Momentary difficulities. We're on it.");
         if (!$this->connect()) return $response;
         $time  = time();
+        // Inline sql hurts my soul.
         $query = !$timed? $this->query : "SELECT memo ,settings ,from_unixtime(time,'%M %e, %Y, %l:%i %p:') as formatted FROM dropcan WHERE time > $time - 5 ORDER BY time DESC limit 10";
         return array("data"=>($this->db_server->query($query)->fetch_all(MYSQLI_ASSOC)));
     }

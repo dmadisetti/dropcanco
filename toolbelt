@@ -173,7 +173,7 @@ all(){
 
 }
 
-fuckitall(){
+forgetitall(){
 
     sudo docker stop $(sudo docker ps -a -q)
     sudo docker rm   $(sudo docker ps -a -q)
@@ -183,7 +183,7 @@ fuckitall(){
 
 phoenix(){
 
-    fuckitall
+    forgetitall
     all
 
 }
@@ -205,7 +205,7 @@ while getopts "h?rnsdiklcxoampv:" opt; do
         ;;
     k)  die
         ;;
-    x)  fuckitall
+    x)  forgetitall
         ;;
     d)  dev
         ;;

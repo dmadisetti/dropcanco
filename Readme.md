@@ -1,9 +1,17 @@
 Dropcanco
 -----
 
-- TODO: Get this live!!!
+*So what is this?* Frankly it was an experiement and the brain child of Mat. The idea was, you could dump anything you wanted to- throw it away- and let the internet take away your problems. It worked fairly alright, and then [reddit](http://www.reddit.com/r/humor/comments/2hr8wz/my_friend_made_a_website_where_you_can_throw_away/) broke the site. Mat wrote to me, and I rebuilt the site as quickly as I could- hoping to smooth out some of the bumps and hang ups that were causing the site to crash and be slow. As such, some of this code isn't pretty, and a lot of it is recycled from a [different project](https://github.com/dmadisetti/badsec). But it's a fairly small project.
 
-This set up allows for easy deployments to production and easy setup for devs. This box should not change much, if it does then there are bigger problems at hand.
+![What Dropcanco looks like](https://raw.github.com/mathexl/dropcanco/master/dropcanco.png "Screenshot")
+
+Dropcanco lost a lot of traction after Reddit. However there were still occassionally posts. In order to promote more engagement with the product, we scripted out a twitter bot that favourited and retweeted random tweets with key hashtags. The bot would also pot to dropcanco from twitter, and post to twitter from dropcanco.
+
+Unfortunately, the nature of anonymous posts on the internet tends to expose the meaner, bigoted and plain hateful side of the internet. Although we did impose certain censor, without human intervention (Or a level of NLP we we're willing to dedicate the time to), it was virtually impossible to clean dropcan.co even relatively clean. In the dump from the original site (seed.sql), there may be reminants of this, and if you choose to reboot the project- be warned.
+
+Happy hacking!
+
+---
 
 Getting started?
 
@@ -35,7 +43,7 @@ Troubleshooting
 -----
 - If for some reason it hasn't worked, run `./toolbelt -d`. There's a chance the database didn't finish initializing.
 - Another weird reason for it not working is the conversion of unix to windows line endings. This problem sounds pretty weird [but it is legit](http://stackoverflow.com/questions/14219092/bash-my-script-bin-bashm-bad-interpreter-no-such-file-or-directory). Thankfully there's a tool called `dos2unix` which you can install on your vagrant box using `sudo apt-get install dos2unix` run `dos2unix filename` to fix your worries. Note, I think it does something funky to file permissions. Just [make sure no weird file permissions git track into git](http://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-chmod-changes).
-- Is it really bad? See the notes on the `fuckitall` function and reseting your database down below. Send me (DM) an email if it gets to crazy levels of bad contact@dylanmadisetti.com
+- Is it really bad? See the notes on the `forgetitall` function and reseting your database down below. Send me (DM) an email if it gets to crazy levels of bad contact@dylanmadisetti.com
 - Uploads for wordpress don't work? All ajax reponses and any response request for that matter get crunked up by existing php errors. Comment out the debug conditional in wp-config if you don't want these errors to pop up OR fix the php errors.
 
 Are you golden? Alright, now what?
@@ -46,7 +54,7 @@ Are you golden? Alright, now what?
 
 Also...
 
-If you play with the dev box, I would highly recommend learning how to `docker`. Failing that, if docker takes up too much disk space or you feel like you messed something up, run `./toolbelt -x`. This is the `fuckitall` method. It should kill everything docker related.
+If you play with the dev box, I would highly recommend learning how to `docker`. Failing that, if docker takes up too much disk space or you feel like you messed something up, run `./toolbelt -x`. This is the `forgetitall` method. It should kill everything docker related.
 
 -----
 

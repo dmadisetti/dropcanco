@@ -1,3 +1,4 @@
+// realtime update hack. Was never really great, but sorta worked. Socket-io would have been better call
 container = document.getElementById('container');
 check = function() {
     xhr = new XMLHttpRequest();
