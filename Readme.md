@@ -6,7 +6,7 @@ Dropcanco
 ![What Dropcanco looks like](https://raw.github.com/mathexl/dropcanco/master/dropcanco.png "Screenshot")
 
 Dropcanco lost a lot of traction after Reddit. However there were still occasionally posts. In order to promote more engagement with the product, we scripted out a twitter bot that favourited and retweeted random tweets with key hashtags. The bot would also post to dropcanco from twitter, and post to twitter from dropcanco.
-Unfortunately, the nature of anonymous posts on the internet tends to expose the meaner, bigoted and plain hateful side of the internet. Although we did impose certain censor, without human intervention (Or a level of NLP we we're willing to dedicate the time to), it was virtually impossible to clean dropcan.co even relatively clean. In the dump from the original site (seed.sql), there may be remnants of this, and if you choose to reboot the project- be warned.
+Unfortunately, the nature of anonymous posts on the internet tends to expose the meaner, bigoted and plain hateful side of the internet. Although we did impose certain censor, without human intervention (Or a level of NLP we were not willing to dedicate the time to), it was virtually impossible to clean dropcan.co even relatively clean. In the dump from the original site (seed.sql), there may be remnants of this, and if you choose to reboot the project- be warned.
 
 Happy hacking!
 
