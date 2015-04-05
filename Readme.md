@@ -1,19 +1,20 @@
 Dropcanco
 -----
 
-*So what is this?* Frankly it was an experiement and the brain child of Mat. The idea was, you could dump anything you wanted to- throw it away- and let the internet take away your problems. It worked fairly alright, and then [reddit](http://www.reddit.com/r/humor/comments/2hr8wz/my_friend_made_a_website_where_you_can_throw_away/) broke the site. Mat wrote to me, and I rebuilt the site as quickly as I could- hoping to smooth out some of the bumps and hang ups that were causing the site to crash and be slow. As such, some of this code isn't pretty, and a lot of it is recycled from a [different project](https://github.com/dmadisetti/badsec). But it's a fairly small project.
+*So what is this?* Frankly it was an experiment and the brainchild of Mat. The idea was, you could dump anything you wanted to- throw it away- and let the internet take away your problems. It worked fairly alright, and then [reddit](http://www.reddit.com/r/humor/comments/2hr8wz/my_friend_made_a_website_where_you_can_throw_away/) broke the site. Mat wrote to me, and I rebuilt the site as quickly as I could- hoping to smooth out some of the bumps and hang ups that were causing the site to crash and be slow. As such, some of this code isn't pretty, and a lot of it is recycled from a [different project](https://github.com/dmadisetti/badsec). But it's a fairly small project.
 
 ![What Dropcanco looks like](https://raw.github.com/mathexl/dropcanco/master/dropcanco.png "Screenshot")
 
-Dropcanco lost a lot of traction after Reddit. However there were still occassionally posts. In order to promote more engagement with the product, we scripted out a twitter bot that favourited and retweeted random tweets with key hashtags. The bot would also pot to dropcanco from twitter, and post to twitter from dropcanco.
-
-Unfortunately, the nature of anonymous posts on the internet tends to expose the meaner, bigoted and plain hateful side of the internet. Although we did impose certain censor, without human intervention (Or a level of NLP we we're willing to dedicate the time to), it was virtually impossible to clean dropcan.co even relatively clean. In the dump from the original site (seed.sql), there may be reminants of this, and if you choose to reboot the project- be warned.
+Dropcanco lost a lot of traction after Reddit. However there were still occasionally posts. In order to promote more engagement with the product, we scripted out a twitter bot that favourited and retweeted random tweets with key hashtags. The bot would also post to dropcanco from twitter, and post to twitter from dropcanco.
+Unfortunately, the nature of anonymous posts on the internet tends to expose the meaner, bigoted and plain hateful side of the internet. Although we did impose certain censor, without human intervention (Or a level of NLP we we're willing to dedicate the time to), it was virtually impossible to clean dropcan.co even relatively clean. In the dump from the original site (seed.sql), there may be remnants of this, and if you choose to reboot the project- be warned.
 
 Happy hacking!
+
 
 ---
 
 Getting started?
+--
 
 Managing this Code (basic git control skip if you know this)
 -----
