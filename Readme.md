@@ -1,7 +1,9 @@
 Dropcanco
 -----
 
-*So what is this?* Frankly it was an experiment and the brainchild of Mat. The idea was, you could dump anything you wanted to- throw it away- and let the internet take away your problems. It worked fairly alright, and then [reddit](http://www.reddit.com/r/humor/comments/2hr8wz/my_friend_made_a_website_where_you_can_throw_away/) broke the site. Mat wrote to me, and I rebuilt the site as quickly as I could- hoping to smooth out some of the bumps and hang ups that were causing the site to crash and be slow. As such, some of this code isn't pretty, and a lot of it is recycled from a [different project](https://github.com/dmadisetti/badsec). But it's a fairly small project.
+Readme by [Dylan](http://github.com/dmadisetti):
+
+*So what is this?* Frankly it was an experiment and the brainchild of Mat. The idea was, you could dump anything you wanted to- throw it away- and let the internet take away your problems. It worked fairly alright, and then [reddit](http://www.reddit.com/r/humor/comments/2hr8wz/my_friend_made_a_website_where_you_can_throw_away/) broke the site. Mat wrote to me, and I rebuilt the site as quickly as I could- hoping to smooth out some of the bumps and hang ups that were causing the site to crash and be slow. As such, some of this code isn't pretty, and a lot of it is recycled from a [different project](https://github.com/dmadisetti/badsec). But it's a fairly small project- it worked and help up to traffic.
 
 ![What Dropcanco looks like](https://raw.github.com/mathexl/dropcanco/master/dropcanco.png "Screenshot")
 
